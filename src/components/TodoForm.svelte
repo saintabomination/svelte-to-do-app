@@ -1,4 +1,6 @@
 <script>
+  import Button from './Button.svelte';
+
   export let addTodo;
   let todoText = '';
 
@@ -12,24 +14,19 @@
 
 <form on:submit|preventDefault={() => handleSubmit()}>
   <input type="text" bind:value={todoText}>
-  <button>Add Todo</button>
+  <Button>Add Todo</Button>
 </form>
 
 <style>
   form {
     display: flex;
+    align-items: center;
     margin-top: auto;
   }
 
   form input {
     flex: 1;
     padding: 12px;
-    outline: none;
-    border: none;
-  }
-
-  form button {
-    padding: 0 12px;
     outline: none;
     border: none;
   }

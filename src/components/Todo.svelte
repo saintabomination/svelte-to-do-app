@@ -1,11 +1,14 @@
 <script>
+  import Button from './Button.svelte';
+
   export let todo;
+  export let deleteTodo;
 </script>
 
 <div class="todo">
   <li>
     <p>{todo.text}</p>
-    <button on:click>Delete</button>
+    <Button on:click={() => deleteTodo(todo.id)}>Delete</Button>
   </li>
 </div>
 
@@ -18,10 +21,6 @@
   
   .todo p {
     padding: 12px;
-  }
-
-  .todo button {
-    margin-left: auto;
-    padding: 12px;
+    flex-grow: 1;
   }
 </style>

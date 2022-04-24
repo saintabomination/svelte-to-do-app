@@ -9,7 +9,7 @@
   {#if todos.length}
     <ul>
       {#each todos as todo (todo.id)}
-        <Todo todo={todo} on:click={() => deleteTodo(todo.id)} />
+        <Todo todo={todo} deleteTodo={deleteTodo} />
       {/each}
     </ul>
     {:else}

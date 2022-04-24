@@ -56,12 +56,14 @@
   .main-wrap .content-part .content-wrap {
     display: flex;
     flex-direction: column;
+    padding: 16px;
     width: 100%;
     max-width: 480px;
     height: 100%;
     max-height: 500px;
     background-color: #151718;
     box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
+    border-radius: 8px;
   }
 
   .main-wrap .content-part .content-wrap .titlebar {
