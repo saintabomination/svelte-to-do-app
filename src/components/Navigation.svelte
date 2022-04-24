@@ -11,11 +11,16 @@
   .page-navigation {
     display: flex;
     align-items: center;
+    padding: 12px;
   }
 
   .navigation-items {
     display: flex;
     align-items: center;
     margin-left: auto;
+  }
+
+  .navigation-items > li:not(:last-child) {
+    margin-right: 12px;
   }
 </style>

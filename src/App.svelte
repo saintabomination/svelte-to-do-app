@@ -3,20 +3,17 @@
 
   import Navigation from './components/Navigation.svelte';
   import Todo from './components/Todo.svelte';
+  import TodoForm from './components/TodoForm.svelte';
   import Footer from './components/Footer.svelte';
 
-  let newTodo = '';
   let todos = [];
 
-  const addTodo = () => {
-    if (newTodo) {
-      todos = [...todos, {
-        id: uuidv4(),
-        text: newTodo,
-        done: false,
-      }];
-      newTodo = '';
-    }
+  const addTodo = text => {
+    todos = [...todos, {
+      id: uuidv4(),
+      text: text,
+      done: false,
+    }];
   }
 
   const deleteTodo = id => {
@@ -24,10 +21,6 @@
       todo =>
       todo.id !== id
     );
-  }
-
-  const handleTodoChange = e => {
-    newTodo = e.target.value;
   }
 </script>
 
@@ -44,10 +37,7 @@
           {:else}
           <p>There are no to-dos to show.</p>
         {/if}
-        <div class="todo-input">
-          <input on:change={e => handleTodoChange(e)} value={newTodo} type="text">
-          <button on:click={() => addTodo()}>Add Todo</button>
-        </div>
+        <TodoForm addTodo={addTodo} />
       </div>
     </div>
     <Footer />
@@ -65,6 +55,8 @@
     justify-content: center;
     align-items: center;
     flex: 1;
+    padding: 24px;
+    background-color: #359c52;
   }
 
   .main-wrap .content-part .content-wrap {
@@ -74,9 +66,6 @@
     max-width: 300px;
     height: 100%;
     max-height: 500px;
-  }
-
-  .main-wrap .content-part .content-wrap .todo-input {
-    margin-top: auto;
+    background-color: #fafafa;
   }
 </style>
