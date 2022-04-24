@@ -2,7 +2,7 @@
   import { v4 as uuidv4 } from 'uuid';
 
   import Navigation from './components/Navigation.svelte';
-  import Todo from './components/Todo.svelte';
+  import TodoList from './components/TodoList.svelte';
   import TodoForm from './components/TodoForm.svelte';
   import Footer from './components/Footer.svelte';
 
@@ -28,15 +28,7 @@
     <Navigation />
     <div class="content-part">
       <div class="content-wrap">
-        {#if todos.length}
-          <ul>
-            {#each todos as todo (todo.id)}
-              <Todo todo={todo} on:click={() => deleteTodo(todo.id)} />
-            {/each}
-          </ul>
-          {:else}
-          <p>There are no to-dos to show.</p>
-        {/if}
+        <TodoList todos={todos} deleteTodo={deleteTodo} />
         <TodoForm addTodo={addTodo} />
       </div>
     </div>
