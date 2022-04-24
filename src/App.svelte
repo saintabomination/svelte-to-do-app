@@ -31,23 +31,32 @@
   }
 </script>
 
-<main>
+<main class="main-wrap">
     <Navigation />
-    <h1>My To-Do App</h1>
-    {#if todos.length}
-      <ul>
-        {#each todos as todo (todo.id)}
-          <Todo todo={todo} deleteTodo={deleteTodo} />
-        {/each}
-      </ul>
-      {:else}
-      <p>There are no to-dos to show.</p>
-    {/if}
-    <input on:change={e => handleTodoChange(e)} value={newTodo} type="text">
-    <button on:click={() => addTodo()}>Add Todo</button>
+    <div class="content-part">
+      {#if todos.length}
+        <ul>
+          {#each todos as todo (todo.id)}
+            <Todo todo={todo} on:click={() => deleteTodo(todo.id)} />
+          {/each}
+        </ul>
+        {:else}
+        <p>There are no to-dos to show.</p>
+      {/if}
+      <input on:change={e => handleTodoChange(e)} value={newTodo} type="text">
+      <button on:click={() => addTodo()}>Add Todo</button>
+    </div>
     <Footer />
 </main>
 
 <style>
+  .main-wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
 
+  .content-part {
+    flex: 1;
+  }
 </style>
