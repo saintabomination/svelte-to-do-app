@@ -1,10 +1,8 @@
 <script>
   import { v4 as uuidv4 } from 'uuid';
 
-  import Navigation from './components/Navigation.svelte';
   import TodoList from './components/TodoList.svelte';
   import TodoForm from './components/TodoForm.svelte';
-  import Footer from './components/Footer.svelte';
 
   let todos = [];
 
@@ -25,14 +23,17 @@
 </script>
 
 <main class="main-wrap">
-    <Navigation />
     <div class="content-part">
       <div class="content-wrap">
+        <div class="titlebar">
+          <div class="button"></div>
+          <div class="button"></div>
+          <div class="button"></div>
+        </div>
         <TodoList todos={todos} deleteTodo={deleteTodo} />
         <TodoForm addTodo={addTodo} />
       </div>
     </div>
-    <Footer />
 </main>
 
 <style>
@@ -44,20 +45,49 @@
 
   .main-wrap .content-part {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex: 1;
     padding: 24px;
-    background-color: #359c52;
+    background-color: #232323;
   }
 
   .main-wrap .content-part .content-wrap {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 300px;
+    max-width: 480px;
     height: 100%;
     max-height: 500px;
-    background-color: #fafafa;
+    background-color: #151718;
+    box-shadow: 0 20px 68px rgb(0 0 0 / 55%);
+  }
+
+  .main-wrap .content-part .content-wrap .titlebar {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    width: 100%;
+    height: 36px;
+  }
+
+  .main-wrap .content-part .content-wrap .titlebar .button {
+    margin-right: 8px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+
+  .main-wrap .content-part .content-wrap .titlebar .button:nth-child(1) {
+    background-color: #ff5f56;
+  }
+
+  .main-wrap .content-part .content-wrap .titlebar .button:nth-child(2) {
+    background-color: #ffbd2e;
+  }
+
+  .main-wrap .content-part .content-wrap .titlebar .button:nth-child(3) {
+    background-color: #27c93f;
   }
 </style>

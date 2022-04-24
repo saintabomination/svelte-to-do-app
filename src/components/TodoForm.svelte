@@ -24,9 +24,13 @@
   form input {
     flex: 1;
     padding: 12px;
+    outline: none;
+    border: none;
   }
 
   form button {
     padding: 0 12px;
+    outline: none;
+    border: none;
   }
 </style>
