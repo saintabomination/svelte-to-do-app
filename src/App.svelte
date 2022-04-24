@@ -1,23 +1,26 @@
 <script>
+  import { v4 as uuidv4 } from 'uuid';
+
   import Navigation from './Navigation.svelte';
   import Footer from './Footer.svelte';
 
   let newTodo = '';
-  let todos = [
-    { id: 0, text: 'Todo 1', done: false },
-    { id: 1, text: 'Todo 2', done: false },
-    { id: 2, text: 'Todo 3', done: false },
-    { id: 3, text: 'Todo 4', done: false },
-    { id: 4, text: 'Todo 5', done: false },
-  ];
+  let todos = [];
 
   const addTodo = () => {
     todos = [...todos, {
-      id: Math.floor(Math.random() * 1000),
+      id: uuidv4(),
       text: newTodo,
       done: false,
     }];
     newTodo = '';
+  }
+
+  const deleteTodo = id => {
+    todos = todos.filter(
+      todo =>
+      todo.id !== id
+    );
   }
 
   const handleTodoChange = e => {
@@ -31,7 +34,10 @@
     {#if todos.length}
       <ul>
         {#each todos as todo (todo.id)}
-          <li>{todo.text}</li>
+          <li>
+            {todo.text}
+            <button on:click={() => deleteTodo(todo.id)}>Delete</button>
+          </li>
         {/each}
       </ul>
       {:else}
