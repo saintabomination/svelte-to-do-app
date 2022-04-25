@@ -14,6 +14,17 @@
     }];
   }
 
+  const markTodoDone = id => {
+    todos = todos.map(
+      todo =>
+      todo.id === id
+        ? {
+          ...todo,
+          done: !todo.done,
+        } : todo
+    );
+  }
+
   const deleteTodo = id => {
     todos = todos.filter(
       todo =>
@@ -30,7 +41,7 @@
           <div class="button"></div>
           <div class="button"></div>
         </div>
-        <TodoList todos={todos} deleteTodo={deleteTodo} />
+        <TodoList todos={todos} markTodoDone={markTodoDone} deleteTodo={deleteTodo} />
         <TodoForm addTodo={addTodo} />
       </div>
     </div>

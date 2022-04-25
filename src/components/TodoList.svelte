@@ -2,6 +2,7 @@
   import Todo from './Todo.svelte';
 
   export let todos;
+  export let markTodoDone;
   export let deleteTodo;
 </script>
 
@@ -9,7 +10,7 @@
   {#if todos.length}
     <ul>
       {#each todos as todo (todo.id)}
-        <Todo todo={todo} deleteTodo={deleteTodo} />
+        <Todo todo={todo} markTodoDone={markTodoDone} deleteTodo={deleteTodo} />
       {/each}
     </ul>
     {:else}
