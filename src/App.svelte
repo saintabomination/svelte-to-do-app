@@ -81,6 +81,7 @@
     display: flex;
     align-items: center;
     padding: 12px;
+    padding-bottom: 24px;
     width: 100%;
     height: 36px;
   }

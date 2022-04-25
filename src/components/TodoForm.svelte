@@ -15,7 +15,7 @@
 
 <form on:submit|preventDefault={() => handleSubmit()}>
   <Input on:change={e => todoText = e.target.value} todoText={todoText} />
-  <Button>Add Todo</Button>
+  <Button buttonType="blue">Add Todo</Button>
 </form>
 
 <style>
