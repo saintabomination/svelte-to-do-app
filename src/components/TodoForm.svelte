@@ -1,4 +1,5 @@
 <script>
+  import Input from './Input.svelte';
   import Button from './Button.svelte';
 
   export let addTodo;
@@ -13,7 +14,7 @@
 </script>
 
 <form on:submit|preventDefault={() => handleSubmit()}>
-  <input type="text" bind:value={todoText}>
+  <Input on:change={e => todoText = e.target.value} todoText={todoText} />
   <Button>Add Todo</Button>
 </form>
 
@@ -22,12 +23,6 @@
     display: flex;
     align-items: center;
     margin-top: auto;
-  }
-
-  form input {
-    flex: 1;
-    padding: 12px;
-    outline: none;
-    border: none;
+    gap: 8px;
   }
 </style>
