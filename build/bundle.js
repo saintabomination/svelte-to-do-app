@@ -79,6 +79,9 @@ var app = (function () {
         }
         return -1;
     }
+    function null_to_empty(value) {
+        return value == null ? '' : value;
+    }
     function append(target, node) {
         target.appendChild(node);
     }
@@ -643,18 +646,19 @@ var app = (function () {
 
     function create_fragment$5(ctx) {
     	let button;
+    	let button_class_value;
     	let current;
     	let mounted;
     	let dispose;
-    	const default_slot_template = /*#slots*/ ctx[1].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[0], null);
+    	const default_slot_template = /*#slots*/ ctx[2].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
 
     	const block = {
     		c: function create() {
     			button = element("button");
     			if (default_slot) default_slot.c();
-    			attr_dev(button, "class", "svelte-17xdx0l");
-    			add_location(button, file$5, 0, 0, 0);
+    			attr_dev(button, "class", button_class_value = "" + (null_to_empty(/*buttonType*/ ctx[0]) + " svelte-y4q5k4"));
+    			add_location(button, file$5, 4, 0, 57);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -669,24 +673,28 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[2], false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[3], false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
     			if (default_slot) {
-    				if (default_slot.p && (!current || dirty & /*$$scope*/ 1)) {
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 2)) {
     					update_slot_base(
     						default_slot,
     						default_slot_template,
     						ctx,
-    						/*$$scope*/ ctx[0],
+    						/*$$scope*/ ctx[1],
     						!current
-    						? get_all_dirty_from_scope(/*$$scope*/ ctx[0])
-    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[0], dirty, null),
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[1])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[1], dirty, null),
     						null
     					);
     				}
+    			}
+
+    			if (!current || dirty & /*buttonType*/ 1 && button_class_value !== (button_class_value = "" + (null_to_empty(/*buttonType*/ ctx[0]) + " svelte-y4q5k4"))) {
+    				attr_dev(button, "class", button_class_value);
     			}
     		},
     		i: function intro(local) {
@@ -720,7 +728,8 @@ var app = (function () {
     function instance$5($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Button', slots, ['default']);
-    	const writable_props = [];
+    	let { buttonType = 'default' } = $$props;
+    	const writable_props = ['buttonType'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Button> was created with unknown prop '${key}'`);
@@ -731,16 +740,27 @@ var app = (function () {
     	}
 
     	$$self.$$set = $$props => {
-    		if ('$$scope' in $$props) $$invalidate(0, $$scope = $$props.$$scope);
+    		if ('buttonType' in $$props) $$invalidate(0, buttonType = $$props.buttonType);
+    		if ('$$scope' in $$props) $$invalidate(1, $$scope = $$props.$$scope);
     	};
 
-    	return [$$scope, slots, click_handler];
+    	$$self.$capture_state = () => ({ buttonType });
+
+    	$$self.$inject_state = $$props => {
+    		if ('buttonType' in $$props) $$invalidate(0, buttonType = $$props.buttonType);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [buttonType, $$scope, slots, click_handler];
     }
 
     class Button extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, { buttonType: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -748,6 +768,14 @@ var app = (function () {
     			options,
     			id: create_fragment$5.name
     		});
+    	}
+
+    	get buttonType() {
+    		throw new Error("<Button>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set buttonType(value) {
+    		throw new Error("<Button>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -781,7 +809,7 @@ var app = (function () {
     	return block;
     }
 
-    // (14:6) <Button on:click={() => deleteTodo(todo.id)}>
+    // (14:6) <Button on:click={() => deleteTodo(todo.id)} buttonType="blue">
     function create_default_slot$1(ctx) {
     	let t;
 
@@ -801,7 +829,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$1.name,
     		type: "slot",
-    		source: "(14:6) <Button on:click={() => deleteTodo(todo.id)}>",
+    		source: "(14:6) <Button on:click={() => deleteTodo(todo.id)} buttonType=\\\"blue\\\">",
     		ctx
     	});
 
@@ -833,6 +861,7 @@ var app = (function () {
 
     	button1 = new Button({
     			props: {
+    				buttonType: "blue",
     				$$slots: { default: [create_default_slot$1] },
     				$$scope: { ctx }
     			},
@@ -852,13 +881,13 @@ var app = (function () {
     			create_component(button0.$$.fragment);
     			t2 = space();
     			create_component(button1.$$.fragment);
-    			attr_dev(p, "class", "svelte-3t0mz9");
+    			attr_dev(p, "class", "svelte-t72mha");
     			add_location(p, file$4, 10, 4, 185);
-    			attr_dev(div0, "class", "todo-buttons svelte-3t0mz9");
+    			attr_dev(div0, "class", "todo-buttons svelte-t72mha");
     			add_location(div0, file$4, 11, 4, 208);
-    			attr_dev(li, "class", "svelte-3t0mz9");
+    			attr_dev(li, "class", "svelte-t72mha");
     			add_location(li, file$4, 9, 2, 176);
-    			attr_dev(div1, "class", "todo svelte-3t0mz9");
+    			attr_dev(div1, "class", "todo svelte-t72mha");
     			toggle_class(div1, "done", /*todo*/ ctx[0].done);
     			add_location(div1, file$4, 8, 0, 132);
     		},
@@ -1492,7 +1521,7 @@ var app = (function () {
     /* src/components/TodoForm.svelte generated by Svelte v3.47.0 */
     const file$1 = "src/components/TodoForm.svelte";
 
-    // (18:2) <Button>
+    // (18:2) <Button buttonType="blue">
     function create_default_slot(ctx) {
     	let t;
 
@@ -1512,7 +1541,7 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(18:2) <Button>",
+    		source: "(18:2) <Button buttonType=\\\"blue\\\">",
     		ctx
     	});
 
@@ -1537,6 +1566,7 @@ var app = (function () {
 
     	button = new Button({
     			props: {
+    				buttonType: "blue",
     				$$slots: { default: [create_default_slot] },
     				$$scope: { ctx }
     			},
@@ -1733,19 +1763,19 @@ var app = (function () {
     			create_component(todolist.$$.fragment);
     			t3 = space();
     			create_component(todoform.$$.fragment);
-    			attr_dev(div0, "class", "button svelte-17jkm4b");
+    			attr_dev(div0, "class", "button svelte-fho6z1");
     			add_location(div0, file, 39, 10, 721);
-    			attr_dev(div1, "class", "button svelte-17jkm4b");
+    			attr_dev(div1, "class", "button svelte-fho6z1");
     			add_location(div1, file, 40, 10, 758);
-    			attr_dev(div2, "class", "button svelte-17jkm4b");
+    			attr_dev(div2, "class", "button svelte-fho6z1");
     			add_location(div2, file, 41, 10, 795);
-    			attr_dev(div3, "class", "titlebar svelte-17jkm4b");
+    			attr_dev(div3, "class", "titlebar svelte-fho6z1");
     			add_location(div3, file, 38, 8, 688);
-    			attr_dev(div4, "class", "content-wrap svelte-17jkm4b");
+    			attr_dev(div4, "class", "content-wrap svelte-fho6z1");
     			add_location(div4, file, 37, 6, 653);
-    			attr_dev(div5, "class", "content-part svelte-17jkm4b");
+    			attr_dev(div5, "class", "content-part svelte-fho6z1");
     			add_location(div5, file, 36, 4, 620);
-    			attr_dev(main, "class", "main-wrap svelte-17jkm4b");
+    			attr_dev(main, "class", "main-wrap svelte-fho6z1");
     			add_location(main, file, 35, 0, 591);
     		},
     		l: function claim(nodes) {
