@@ -33,4 +33,24 @@
     height: 100%;
     text-align: center;
   }
+
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #686868 #ffffff;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    margin-bottom: 24px;
+    background: none;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #686868;
+    border-radius: 10px;
+    border: -1px none #ffffff;
+  }
 </style>

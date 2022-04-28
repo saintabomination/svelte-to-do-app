@@ -69,7 +69,7 @@
     flex-direction: column;
     padding: 16px;
     width: 100%;
-    max-width: 480px;
+    max-width: 540px;
     height: 100%;
     max-height: 500px;
     background-color: #151718;

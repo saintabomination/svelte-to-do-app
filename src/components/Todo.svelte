@@ -10,7 +10,7 @@
   <li>
     <p>{todo.text}</p>
     <div class="todo-buttons">
-      <Button on:click={() => markTodoDone(todo.id)}>Mark done</Button>
+      <Button on:click={() => markTodoDone(todo.id)}>{todo.done ? 'Mark undone' : 'Mark done'}</Button>
       <Button on:click={() => deleteTodo(todo.id)} buttonType="blue">Delete</Button>
     </div>
   </li>
