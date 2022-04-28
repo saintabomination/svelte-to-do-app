@@ -784,14 +784,18 @@ var app = (function () {
 
     // (13:6) <Button on:click={() => markTodoDone(todo.id)}>
     function create_default_slot_1(ctx) {
+    	let t_value = (/*todo*/ ctx[0].done ? 'Mark undone' : 'Mark done') + "";
     	let t;
 
     	const block = {
     		c: function create() {
-    			t = text("Mark done");
+    			t = text(t_value);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*todo*/ 1 && t_value !== (t_value = (/*todo*/ ctx[0].done ? 'Mark undone' : 'Mark done') + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t);
@@ -910,7 +914,7 @@ var app = (function () {
     			if ((!current || dirty & /*todo*/ 1) && t0_value !== (t0_value = /*todo*/ ctx[0].text + "")) set_data_dev(t0, t0_value);
     			const button0_changes = {};
 
-    			if (dirty & /*$$scope*/ 32) {
+    			if (dirty & /*$$scope, todo*/ 33) {
     				button0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -1064,8 +1068,9 @@ var app = (function () {
     			div = element("div");
     			p = element("p");
     			p.textContent = "There are no to-dos to show.";
+    			attr_dev(p, "class", "svelte-l7xlwb");
     			add_location(p, file$3, 17, 6, 371);
-    			attr_dev(div, "class", "no-todos svelte-1gxxjkg");
+    			attr_dev(div, "class", "no-todos svelte-l7xlwb");
     			add_location(div, file$3, 16, 4, 342);
     		},
     		m: function mount(target, anchor) {
@@ -1116,6 +1121,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
+    			attr_dev(ul, "class", "svelte-l7xlwb");
     			add_location(ul, file$3, 10, 4, 178);
     		},
     		m: function mount(target, anchor) {
@@ -1255,7 +1261,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			if_block.c();
-    			attr_dev(div, "class", "todo-list svelte-1gxxjkg");
+    			attr_dev(div, "class", "todo-list svelte-l7xlwb");
     			add_location(div, file$3, 8, 0, 129);
     		},
     		l: function claim(nodes) {
@@ -1763,19 +1769,19 @@ var app = (function () {
     			create_component(todolist.$$.fragment);
     			t3 = space();
     			create_component(todoform.$$.fragment);
-    			attr_dev(div0, "class", "button svelte-fho6z1");
+    			attr_dev(div0, "class", "button svelte-1xmdep4");
     			add_location(div0, file, 39, 10, 721);
-    			attr_dev(div1, "class", "button svelte-fho6z1");
+    			attr_dev(div1, "class", "button svelte-1xmdep4");
     			add_location(div1, file, 40, 10, 758);
-    			attr_dev(div2, "class", "button svelte-fho6z1");
+    			attr_dev(div2, "class", "button svelte-1xmdep4");
     			add_location(div2, file, 41, 10, 795);
-    			attr_dev(div3, "class", "titlebar svelte-fho6z1");
+    			attr_dev(div3, "class", "titlebar svelte-1xmdep4");
     			add_location(div3, file, 38, 8, 688);
-    			attr_dev(div4, "class", "content-wrap svelte-fho6z1");
+    			attr_dev(div4, "class", "content-wrap svelte-1xmdep4");
     			add_location(div4, file, 37, 6, 653);
-    			attr_dev(div5, "class", "content-part svelte-fho6z1");
+    			attr_dev(div5, "class", "content-part svelte-1xmdep4");
     			add_location(div5, file, 36, 4, 620);
-    			attr_dev(main, "class", "main-wrap svelte-fho6z1");
+    			attr_dev(main, "class", "main-wrap svelte-1xmdep4");
     			add_location(main, file, 35, 0, 591);
     		},
     		l: function claim(nodes) {
